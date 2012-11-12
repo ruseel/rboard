@@ -10,7 +10,7 @@ class TopicTest < ActiveSupport::TestCase
      t.admin=admin
      t.save
 
-     # assert_not_nil t.boardish
+     assert_not_nil t.boardish
   end
 
 

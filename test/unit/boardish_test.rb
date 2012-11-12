@@ -3,13 +3,13 @@ require 'test_helper'
 class BoardishTest < ActiveSupport::TestCase
   test "create default boardish" do
     Boardish.new
+    Boardish.new nil
   end
 
   test "create with different initializer" do
     Boardish.new(1)
-    assert_equal Boardish.new(1,126), Boardish.new(1).inc_at_depth(1)
-    assert_equal Boardish.new(1,126,126), Boardish.new(1).inc_at_depth(1).inc_at_depth(2)
-    assert_equal Boardish.new(1,126,126,126), Boardish.new(1).inc_at_depth(1).inc_at_depth(2).inc_at_depth(3)
+    assert_equal Boardish.new(1,6), Boardish.new(1).inc_at_depth(1)
+    assert_equal Boardish.new(1,6,6), Boardish.new(1).inc_at_depth(1).inc_at_depth(2)
   end
 
   test "increase at all depth" do
@@ -25,7 +25,7 @@ class BoardishTest < ActiveSupport::TestCase
   end
 
   test "max depth" do
-    assert_equal 4, Boardish.new.max_depth
+    assert_equal 3, Boardish.new.max_depth
   end
 
   test "equality test" do

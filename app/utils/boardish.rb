@@ -6,10 +6,12 @@ end
 class Boardish
   attr_accessor :parts
 
-  DEPTH_SPEC = [16, 7, 7, 7]
-  DEFAULT_VALUES = [0, max(7), max(7), max(7)]
+  BIT_SIZE = 3
+  DEPTH_SPEC = [23, BIT_SIZE, BIT_SIZE]
+  DEFAULT_VALUES = [0, max(BIT_SIZE), max(BIT_SIZE)]
 
   def initialize(*args)
+    args = [] if args == [nil]
     @parts = args + DEFAULT_VALUES[args.size..-1]
   end
 
@@ -25,12 +27,11 @@ class Boardish
   end
 
   def to_i
-    a = parts[0] << (7*3)
-    b = parts[1] << (7*2)
-    c = parts[2] << (7*1)
-    d = parts[3] << (7*0)
+    a = parts[0] << (BIT_SIZE*2)
+    b = parts[1] << (BIT_SIZE*1)
+    c = parts[2] << (BIT_SIZE*0)
 
-    a | b | c | d
+    a | b | c
   end
 
   def ==(other)
