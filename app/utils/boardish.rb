@@ -71,5 +71,9 @@ class Boardish
 
       self.new(a, b, c)
     end
+
+    def from_array(list)
+      self.new(*list)
+    end
   end
 end

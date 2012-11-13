@@ -1,65 +1,69 @@
 require 'test_helper'
 
 class BoardishTest < ActiveSupport::TestCase
+  def n(*args)
+    Boardish.from_array args
+  end
+
   test "create default boardish" do
-    Boardish.new
-    Boardish.new nil
+    n
+    n nil
   end
 
   test "create with different initializer" do
-    Boardish.new(1)
-    assert_equal Boardish.new(1,6), Boardish.new(1).inc_at_depth(1)
-    assert_equal Boardish.new(1,6,6), Boardish.new(1).inc_at_depth(1).inc_at_depth(2)
+    n(1)
+    assert_equal n(1,6), n(1).inc_at_depth(1)
+    assert_equal n(1,6,6), n(1).inc_at_depth(1).inc_at_depth(2)
   end
 
   test "from_int" do
-    assert_equal Boardish.new(1, 6, 6), Boardish.from_int(Boardish.new(1, 6, 6).to_i)
-    assert_equal Boardish.new(127, 6, 7), Boardish.from_int(Boardish.new(127, 6, 7).to_i)
+    assert_equal n(1, 6, 6), Boardish.from_int(n(1, 6, 6).to_i)
+    assert_equal n(127, 6, 7), Boardish.from_int(n(127, 6, 7).to_i)
   end
 
   test "increase at all depth" do
     (0...Boardish::DEPTH_SPEC.size).each do |i|
-      Boardish.new.inc_at_depth i
+      n.inc_at_depth i
     end
   end
 
   test "inc_at_depth should return another instance" do
-    a = Boardish.new
+    a = n
     b = a.inc_at_depth(0)
     assert_not_equal a.object_id, b.object_id
   end
 
   test "current boardish depth" do
-    assert_equal 0, Boardish.new.depth
-    assert_equal 1, Boardish.new.inc_at_depth(1).depth
-    assert_equal 2, Boardish.new.inc_at_depth(1).inc_at_depth(2).depth
+    assert_equal 0, n.depth
+    assert_equal 1, n.inc_at_depth(1).depth
+    assert_equal 2, n.inc_at_depth(1).inc_at_depth(2).depth
   end
 
   test "reply" do
-    assert_equal Boardish.new.inc_at_depth(1), Boardish.new.reply
+    assert_equal n.inc_at_depth(1), n.reply
 
-    assert_equal 1, Boardish.new.reply.depth
-    assert_equal 2, Boardish.new.reply.reply.depth
-    assert_equal 2, Boardish.new.reply.reply.reply.depth
+    assert_equal 1, n.reply.depth
+    assert_equal 2, n.reply.reply.depth
+    assert_equal 2, n.reply.reply.reply.depth
   end
 
   test "equality test" do
-    assert_equal Boardish.new, Boardish.new
+    assert_equal n, n
   end
 
   test "1,max 2,max should be ordered reverse" do
-    sorted = boardish_sort [Boardish.new(1), Boardish.new(2)]
-    assert_equal [Boardish.new(2), Boardish.new(1)], sorted
+    sorted = boardish_sort [n(1), n(2)]
+    assert_equal [n(2), n(1)], sorted
   end
 
   test "1,max 1,max-1 should be ordered as is" do
-    first = Boardish.new(1)
+    first = n(1)
     reply = first.inc_at_depth(1)
     assert_equal [first, reply], boardish_sort([first, reply])
   end
 
   test "2,max 2,max-1 1,max 1,max-1 should be ordered" do
-    first = Boardish.new(1)
+    first = n(1)
     first_reply = first.inc_at_depth(1)
 
     second = first.inc_at_depth(0)
@@ -69,7 +73,7 @@ class BoardishTest < ActiveSupport::TestCase
   end
 
   test "1,max 1,max-1 1,max-1,max-1, 2,max 2,max-1 should be ordered" do
-    first = Boardish.new(1)
+    first = n(1)
     first_reply = first.inc_at_depth(1)
     first_reply_reply = first_reply.inc_at_depth(2)
 
@@ -81,7 +85,7 @@ class BoardishTest < ActiveSupport::TestCase
   end
 
   test "some wired" do
-    assert_equal Boardish.from_int(Boardish.from_int(Boardish.new(1,7,7).to_i).reply.to_i), Boardish.new(1, 6, 7)
+    assert_equal Boardish.from_int(Boardish.from_int(n(1,7,7).to_i).reply.to_i), n(1, 6, 7)
   end
 
 private
