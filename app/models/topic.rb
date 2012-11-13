@@ -1,13 +1,20 @@
 class Topic < ActiveRecord::Base
   belongs_to :admin
 
-  attr_accessible :body, :subject
+  attr_accessible :body, :subject, :parent
 
   before_save :set_boardish
 
+  def parent=(p)
+    self.boardish = Boardish.from_int(p.boardish).reply.to_i
+  end
+
 private
+
   def set_boardish
-    self.boardish = Boardish.new(largest_boardish).inc_at_depth(0)
+    if self.boardish.nil?
+      self.boardish = Boardish.new(largest_boardish).inc_at_depth(0).to_i
+    end
   end
 
   def largest_boardish

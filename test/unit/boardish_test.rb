@@ -12,20 +12,35 @@ class BoardishTest < ActiveSupport::TestCase
     assert_equal Boardish.new(1,6,6), Boardish.new(1).inc_at_depth(1).inc_at_depth(2)
   end
 
+  test "from_int" do
+    assert_equal Boardish.new(1, 6, 6), Boardish.from_int(Boardish.new(1, 6, 6).to_i)
+    assert_equal Boardish.new(127, 6, 7), Boardish.from_int(Boardish.new(127, 6, 7).to_i)
+  end
+
   test "increase at all depth" do
     (0...Boardish::DEPTH_SPEC.size).each do |i|
       Boardish.new.inc_at_depth i
     end
   end
 
-  test "inc_at_depth return difference object" do
+  test "inc_at_depth should return another instance" do
     a = Boardish.new
     b = a.inc_at_depth(0)
     assert_not_equal a.object_id, b.object_id
   end
 
-  test "max depth" do
-    assert_equal 3, Boardish.new.max_depth
+  test "current boardish depth" do
+    assert_equal 0, Boardish.new.depth
+    assert_equal 1, Boardish.new.inc_at_depth(1).depth
+    assert_equal 2, Boardish.new.inc_at_depth(1).inc_at_depth(2).depth
+  end
+
+  test "reply" do
+    assert_equal Boardish.new.inc_at_depth(1), Boardish.new.reply
+
+    assert_equal 1, Boardish.new.reply.depth
+    assert_equal 2, Boardish.new.reply.reply.depth
+    assert_equal 2, Boardish.new.reply.reply.reply.depth
   end
 
   test "equality test" do
@@ -65,6 +80,9 @@ class BoardishTest < ActiveSupport::TestCase
                   boardish_sort([first, first_reply, first_reply_reply, second, second_reply])
   end
 
+  test "some wired" do
+    assert_equal Boardish.from_int(Boardish.from_int(Boardish.new(1,7,7).to_i).reply.to_i), Boardish.new(1, 6, 7)
+  end
 
 private
   def boardish_sort(boardishs)
