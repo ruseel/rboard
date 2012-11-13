@@ -8,6 +8,8 @@ class BoardishTest < ActiveSupport::TestCase
   test "create default boardish" do
     n
     n nil
+    Boardish.from_int 0
+    Boardish.from_int nil
   end
 
   test "create with different initializer" do

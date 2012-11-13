@@ -4,7 +4,6 @@ end
 
 #
 # Immutable pattern
-#  Bit 사이즈를 3으로 해야 하나?
 #
 class Boardish
   attr_accessor :parts
@@ -13,13 +12,20 @@ class Boardish
   DEPTH_SPEC = [23, BIT_SIZE, BIT_SIZE]
   DEFAULT_VALUES = [0, max(BIT_SIZE), max(BIT_SIZE)]
 
-  def initialize(*args)
-    args = [] if args == [nil]
-    @parts = args + DEFAULT_VALUES[args.size..-1]
+  def initialize(i)
+    if i
+      a = i >> (BIT_SIZE*2)
+      b = (i & 0b111111) >> BIT_SIZE
+      c = (i & 0b111)
+
+      @parts = [a, b, c]
+    else
+      @parts = DEFAULT_VALUES
+    end
   end
 
   def inc_at_depth(depth)
-    self.class.new(*parts).tap do |n|
+    self.class.from_array(parts).tap do |n|
       step = (depth==0) ? 1 : -1
       n.parts[depth] += step
     end
@@ -65,15 +71,18 @@ class Boardish
 
   class << self
     def from_int(i)
-      a = i >> (BIT_SIZE*2)
-      b = (i & 0b111111) >> BIT_SIZE
-      c = (i & 0b111)
-
-      self.new(a, b, c)
+      self.new(i)
     end
 
-    def from_array(list)
-      self.new(*list)
+    def from_array(args)
+      args = [] if args == [nil]
+      args = args + DEFAULT_VALUES[args.size..-1]
+
+      a = args[0] << (BIT_SIZE*2)
+      b = args[1] << (BIT_SIZE*1)
+      c = args[2]
+
+      self.new(a | b | c)
     end
   end
 end

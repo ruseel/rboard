@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
   before_save :set_boardish
 
   def parent=(p)
-    self.boardish = Boardish.from_int(p.boardish).reply.to_i
+    self.boardish = Boardish.new(p.boardish).reply.to_i
   end
 
 private
