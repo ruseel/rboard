@@ -5,20 +5,30 @@ class Topic < ActiveRecord::Base
 
   before_save :set_boardish
 
+  composed_of :boardish,
+              class_name: "Boardish", mapping: [%w(boardish raw)],
+              allow_nil: true, converter: :to_i
+
   def parent=(p)
-    self.boardish = Boardish.new(p.boardish).reply.to_i
+    self.boardish = p.boardish.reply
   end
 
 private
 
   def set_boardish
+    p "set_boardish called #{self.boardish.inspect}"
     if self.boardish.nil?
-      self.boardish = Boardish.new(largest_boardish).inc_at_depth(0).to_i
+      t = self.class.last_root_topic
+      p "+b #{t}"
+      self.boardish = (t ? t.boardish : Boardish.new(nil)).inc_at_depth(0)
+    else
+      p "***"
     end
   end
 
-  def largest_boardish
-    t = Topic.order("boardish desc").limit(1).first
-    t && t.boardish
+  class << self
+    def last_root_topic
+      Topic.order("boardish desc").limit(1).first
+    end
   end
 end

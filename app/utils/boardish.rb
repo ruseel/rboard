@@ -7,12 +7,16 @@ end
 #
 class Boardish
   attr_accessor :parts
-
+  attr_reader :raw
   BIT_SIZE = 3
   DEPTH_SPEC = [23, BIT_SIZE, BIT_SIZE]
   DEFAULT_VALUES = [0, max(BIT_SIZE), max(BIT_SIZE)]
 
   def initialize(i)
+    self.raw = i
+  end
+
+  def raw=(i)
     if i
       a = i >> (BIT_SIZE*2)
       b = (i & 0b111111) >> BIT_SIZE
@@ -22,6 +26,10 @@ class Boardish
     else
       @parts = DEFAULT_VALUES
     end
+  end
+
+  def raw
+    to_i
   end
 
   def inc_at_depth(depth)
