@@ -21,7 +21,12 @@ private
   def set_boardish
     if self.boardish.nil?
       t = self.class.last_root_topic
-      self.boardish = (t ? t.boardish : Boardish.new(nil)).inc_at_depth(0)
+      if t.nil? || t.boardish.nil?
+        b = Boardish.new(nil)
+      else
+        b = t.boardish
+      end
+      self.boardish = b.inc_at_depth(0)
     end
   end
 

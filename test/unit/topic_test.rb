@@ -45,6 +45,6 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal Boardish.from_array([1, 7, 7]), one.boardish
     assert_equal Boardish.from_array([1, 6, 7]), one_one.boardish
 
-    assert_equal ["two", "two_one", "one", "one_one"], subjects
+    assert_equal ["two", "two_one", "one", "one_one", "fixture_one"], subjects
   end
 end
