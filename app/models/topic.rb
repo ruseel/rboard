@@ -10,6 +10,8 @@ class Topic < ActiveRecord::Base
               allow_nil: true,
               converter: :to_i
 
+  default_scope { order("boardish desc") }
+
   def parent=(p)
     self.boardish = p.boardish.reply
   end
@@ -25,7 +27,7 @@ private
 
   class << self
     def last_root_topic
-      Topic.order("boardish desc").limit(1).first
+      Topic.limit(1).first
     end
   end
 end

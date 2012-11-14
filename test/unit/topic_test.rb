@@ -39,7 +39,7 @@ class TopicTest < ActiveSupport::TestCase
     one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
     two_one=Topic.create(subject: "two_one", body: "two_one", parent: two)
 
-    subjects = Topic.order("boardish desc").map(&:subject)
+    subjects = Topic.all.map(&:subject)
 
     assert_equal Boardish.from_array([2, 7, 7]), two.boardish
     assert_equal Boardish.from_array([1, 7, 7]), one.boardish
