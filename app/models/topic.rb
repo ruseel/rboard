@@ -7,7 +7,8 @@ class Topic < ActiveRecord::Base
 
   composed_of :boardish,
               class_name: "Boardish", mapping: [%w(boardish raw)],
-              allow_nil: true, converter: :to_i
+              allow_nil: true,
+              converter: :to_i
 
   def parent=(p)
     self.boardish = p.boardish.reply
@@ -16,13 +17,9 @@ class Topic < ActiveRecord::Base
 private
 
   def set_boardish
-    p "set_boardish called #{self.boardish.inspect}"
     if self.boardish.nil?
       t = self.class.last_root_topic
-      p "+b #{t}"
       self.boardish = (t ? t.boardish : Boardish.new(nil)).inc_at_depth(0)
-    else
-      p "***"
     end
   end
 
