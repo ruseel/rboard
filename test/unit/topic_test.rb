@@ -33,18 +33,18 @@ class TopicTest < ActiveSupport::TestCase
     assert_equal one.boardish.inc_at_depth(0), two.boardish
   end
 
-  # test "list_order" do
-  #   one=Topic.create(subject: "one", body: "one")
-  #   two=Topic.create(subject: "two", body: "two")
-  #   one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
-  #   two_one=Topic.create(subject: "two_one", body: "two_one", parent: two)
-  #
-  #   subjects = Topic.order("boardish desc").map(&:subject)
-  #
-  #   assert_equal Boardish.from_array([1, 7, 7]), two.boardish
-  #   assert_equal Boardish.from_array([0, 7, 7]), one.boardish
-  #   assert_equal Boardish.from_array([0, 6, 7]), one_one.boardish
-  #
-  #   assert_equal ["two", "two_one", "one", "one_one"], subjects
-  # end
+  test "list_order" do
+    one=Topic.create(subject: "one", body: "one")
+    two=Topic.create(subject: "two", body: "two")
+    one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
+    two_one=Topic.create(subject: "two_one", body: "two_one", parent: two)
+
+    subjects = Topic.order("boardish desc").map(&:subject)
+
+    assert_equal Boardish.from_array([2, 7, 7]), two.boardish
+    assert_equal Boardish.from_array([1, 7, 7]), one.boardish
+    assert_equal Boardish.from_array([1, 6, 7]), one_one.boardish
+
+    assert_equal ["two", "two_one", "one", "one_one"], subjects
+  end
 end
