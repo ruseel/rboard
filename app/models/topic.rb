@@ -1,8 +1,6 @@
 class Topic < ActiveRecord::Base
   belongs_to :admin
 
-  attr_accessor :parent_id
-
   attr_accessible :body, :subject, :parent
   before_save :set_boardish
 

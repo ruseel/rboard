@@ -1,56 +1,31 @@
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
-  def admin
-    @@admin ||= Admin.where(email: "a@a.com").first
-  end
-
   test "create new topic without parent" do
-     t=Topic.new(subject: "a subject", body: "a body")
-     t.admin=admin
-     t.save
-
+     t=Topic.create(subject: "one", body: "one")
      assert_not_nil t.boardish
   end
 
   test "create sub topic" do
-    parent=Topic.new(subject: "parent topic", body: "parent topic")
-    parent.save
-
-    children=Topic.new(subject: "children topic", body: "children topic", parent: parent)
-    children.save
+    parent=Topic.create(subject: "parent", body: "parent")
+    children=Topic.create(subject: "children", body: "children", parent: parent)
 
     assert_equal children.boardish, parent.boardish.reply
   end
 
   test "two topic" do
     one=Topic.create(subject: "one", body: "one")
-    one.save
-
     two=Topic.create(subject: "two", body: "two")
-    two.save
 
     assert_equal one.boardish.inc_at_depth(0), two.boardish
   end
 
-  test "list_order" do
+  test "ordered threads" do
     one=Topic.create(subject: "one", body: "one")
-    two=Topic.create(subject: "two", body: "two")
     one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
+    two=Topic.create(subject: "two", body: "two")
     two_one=Topic.create(subject: "two_one", body: "two_one", parent: two)
 
-    subjects = Topic.all.map(&:subject)
-
-    assert_equal Boardish.from_array([2, 7, 7]), two.boardish
-    assert_equal Boardish.from_array([1, 7, 7]), one.boardish
-    assert_equal Boardish.from_array([1, 6, 7]), one_one.boardish
-
-    assert_equal ["two", "two_one", "one", "one_one", "fixture_one"], subjects
-  end
-
-  test "prev" do
-    one=Topic.create(subject: "one", body: "one")
-    one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
     one_one_one=Topic.create(subject: "one_one_one", body: "one_one_one", parent: one_one)
 
     one_two=Topic.create(subject: "one_two", body: "one_two", parent: one)
@@ -58,6 +33,6 @@ class TopicTest < ActiveSupport::TestCase
     one_two_one=Topic.create(subject: "one_two_one", body: "one_two_one", parent: one_two)
 
     subjects = Topic.all.map(&:subject)
-    assert_equal ["one", "one_one", "one_one_one", "one_two", "one_two_one", "one_three", "fixture_one"], subjects
+    assert_equal %w(two two_one one one_one one_one_one one_two one_two_one one_three fixture_one), subjects
   end
 end
