@@ -24,7 +24,7 @@ class TopicsControllerTest < ActionController::TestCase
 
   test "should get create" do
     assert_difference('Topic.count') do
-      post :create, topic: { subject: @topic.subject, body: @topic.body }
+      post :create, topic: { subject: @topic.subject, body: @topic.body }, parent_id: ""
     end
 
     assert_redirected_to topic_path(assigns(:topic))
@@ -48,4 +48,11 @@ class TopicsControllerTest < ActionController::TestCase
     assert_redirected_to topics_path
   end
 
+  test "should handle reply" do
+    post :create, topic: { subject: "1", body: "1" }
+    parent = assigns(:topic)
+
+    post :create, topic: { subject: "reply-1", body: "reply-1" }, parent_id: parent.id
+    assert_equal parent.boardish.inc_at_depth(1), assigns(:topic).boardish
+  end
 end

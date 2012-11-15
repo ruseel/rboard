@@ -5,4 +5,6 @@
   <%= @topic.body %>
 </div>
 
+<%= link_to "답글", new_topic_path(parent_id: @topic.id) %>
+
 <%= link_to "목록", topics_path %>

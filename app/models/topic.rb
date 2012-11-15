@@ -1,8 +1,9 @@
 class Topic < ActiveRecord::Base
   belongs_to :admin
 
-  attr_accessible :body, :subject, :parent
+  attr_accessor :parent_id
 
+  attr_accessible :body, :subject, :parent
   before_save :set_boardish
 
   composed_of :boardish,
@@ -14,6 +15,10 @@ class Topic < ActiveRecord::Base
 
   def parent=(p)
     self.boardish = p.boardish.reply
+  end
+
+  def depth
+    self.boardish && self.boardish.depth || 0
   end
 
 private

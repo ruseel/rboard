@@ -7,9 +7,12 @@
     </tr>
   <% @topics.each do |topic| %>
     <tr>
-      <td><%= topic.subject %></td>
+      <td><%= depth_mark(topic.depth) %> <%= topic.subject %></td>
       <td><%= topic.created_at %></td>
-      <td><%= link_to "수정", edit_topic_path(topic) %></td>
+      <td>
+        <%= link_to "보기", topic %>
+        <%= link_to "수정", edit_topic_path(topic) %>
+      </td>
     </tr>
   <% end %>
 </table>

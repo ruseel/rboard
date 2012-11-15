@@ -39,6 +39,8 @@ v 2차 답글 쓰기
 
 controller
 v index 페이지
+v create 
+v reply
 - edit
 - update
 - delete

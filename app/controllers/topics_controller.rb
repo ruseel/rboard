@@ -1,4 +1,6 @@
 class TopicsController < ApplicationController
+  helper_method :depth_mark
+
   def index
     @topics = Topic.all
   end
@@ -13,6 +15,10 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(params[:topic])
+    if params[:parent_id].present?
+      @topic.parent = Topic.find(params[:parent_id])
+    end
+
     if @topic.save
       redirect_to @topic, notice: 'Topic was created'
     end
@@ -36,5 +42,10 @@ class TopicsController < ApplicationController
     @topic.destroy
 
     redirect_to topics_url
+  end
+
+private
+  def depth_mark(depth)
+    ("&#x21aa;" * depth).html_safe
   end
 end
