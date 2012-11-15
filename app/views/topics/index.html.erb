@@ -1,2 +1,19 @@
 <h1>Topics#index</h1>
-<p>Find me in app/views/topics/index.html.erb</p>
+<table>
+    <tr>
+      <th>제목</th>
+      <th>작성일</th>
+      <th></th>
+    </tr>
+  <% @topics.each do |topic| %>
+    <tr>
+      <td><%= topic.subject %></td>
+      <td><%= topic.created_at %></td>
+      <td><%= link_to "수정", edit_topic_path(topic) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="footer">
+  <%= link_to "새글 작성", new_topic_path %>
+</div>

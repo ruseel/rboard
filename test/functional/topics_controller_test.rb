@@ -19,6 +19,7 @@ class TopicsControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_not_nil assigns(:topic)
   end
 
   test "should get create" do

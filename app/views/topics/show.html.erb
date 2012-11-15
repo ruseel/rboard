@@ -1,1 +1,8 @@
-show
+<div class="subject">
+  제목: <%= @topic.subject %>
+</div>
+<div class="body">
+  <%= @topic.body %>
+</div>
+
+<%= link_to "목록", topics_path %>
