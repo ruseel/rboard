@@ -47,4 +47,17 @@ class TopicTest < ActiveSupport::TestCase
 
     assert_equal ["two", "two_one", "one", "one_one", "fixture_one"], subjects
   end
+
+  test "prev" do
+    one=Topic.create(subject: "one", body: "one")
+    one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
+    one_one_one=Topic.create(subject: "one_one_one", body: "one_one_one", parent: one_one)
+
+    one_two=Topic.create(subject: "one_two", body: "one_two", parent: one)
+    one_three=Topic.create(subject: "one_three", body: "one_three", parent: one)
+    one_two_one=Topic.create(subject: "one_two_one", body: "one_two_one", parent: one_two)
+
+    subjects = Topic.all.map(&:subject)
+    assert_equal ["one", "one_one", "one_one_one", "one_two", "one_two_one", "one_three", "fixture_one"], subjects
+  end
 end

@@ -86,8 +86,10 @@ class BoardishTest < ActiveSupport::TestCase
                   boardish_sort([first, first_reply, first_reply_reply, second, second_reply])
   end
 
-  test "some wired" do
-    assert_equal Boardish.from_int(Boardish.from_int(n(1,7,7).to_i).reply.to_i), n(1, 6, 7)
+  test "1, 1-1, 1-1-1, 1-2 should be ordered" do
+    first = n(1)
+    first_reply = first.inc_at_depth(1)
+    first_reply_reply = first_reply.inc_at_depth(2)
   end
 
 private

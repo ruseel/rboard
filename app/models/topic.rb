@@ -14,7 +14,11 @@ class Topic < ActiveRecord::Base
   default_scope { order("boardish desc") }
 
   def parent=(p)
-    self.boardish = p.boardish.reply
+    b = p.boardish.reply
+    while (prev = self.class.where(boardish: b).first).present?
+      b = b.inc_at_depth(b.depth)
+    end
+    self.boardish = b
   end
 
   def depth
