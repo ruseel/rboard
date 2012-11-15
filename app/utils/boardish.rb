@@ -12,7 +12,7 @@ class Boardish
   DEPTH_SPEC = [23, BIT_SIZE, BIT_SIZE]
   DEFAULT_VALUES = [0, max(BIT_SIZE), max(BIT_SIZE)]
 
-  def initialize(i)
+  def initialize(i = nil)
     self.raw = i
   end
 
@@ -69,6 +69,10 @@ class Boardish
     c = parts[2]
 
     a | b | c
+  end
+
+  def default?
+    @parts == DEFAULT_VALUES
   end
 
   def ==(other)

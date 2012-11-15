@@ -13,7 +13,7 @@ class BoardishTest < ActiveSupport::TestCase
   end
 
   test "create with different initializer" do
-    n(1)
+    assert_equal Boardish.new, Boardish.new(nil)
     assert_equal n(1,6), n(1).inc_at_depth(1)
     assert_equal n(1,6,6), n(1).inc_at_depth(1).inc_at_depth(2)
   end
