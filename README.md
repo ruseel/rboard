@@ -37,12 +37,12 @@ v 1차 답글 쓰기
 v 2차 답글 쓰기
 - 1-1-1에서 중간 글 삭제하기 
 
-controller
+topic controller
 v index 페이지
 v create 
 v reply
-- edit
-- update
+v edit
+v update
 - delete
 
 - pagination gem 적용 
@@ -51,6 +51,7 @@ v reply
 model test
 v 댓글 쓰기 
 v 댓글 쓰기 (댓글에는 depth가 없도록 한다)
+
 
 
 board 관리 페이지 
