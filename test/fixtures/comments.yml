@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  topic_id: MyString
-  body: MyText
+  topic: one
+  body: comment one
 
 two:
-  topic_id: MyString
-  body: MyText
+  topic: two
+  body: comment_two

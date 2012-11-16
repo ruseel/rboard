@@ -12,7 +12,7 @@ class TopicsControllerTest < ActionController::TestCase
   end
 
   test "should show" do
-    get :show, id: @topic
+    get :show, id: @comment
     assert_response :success
   end
 
