@@ -14,6 +14,9 @@ class TopicsControllerTest < ActionController::TestCase
   test "should show" do
     get :show, id: @topic
     assert_response :success
+    assert_not_nil assigns(:topic)
+    assert_not_nil assigns(:comment)
+    assert_not_nil assigns(:comments)
   end
 
   test "should get new" do

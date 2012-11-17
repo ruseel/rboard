@@ -1,10 +1,17 @@
-<div class="subject">
-  제목: <%= @topic.subject %>
-</div>
-<div class="body">
-  <%= @topic.body %>
+<div class="article">
+  <div class="subject">
+    제목: <%= @topic.subject %>
+  </div>
+  <div class="body">
+    <%= @topic.body %>
+  </div>
 </div>
 
-<%= link_to "답글", new_topic_path(parent_id: @topic.id) %>
+<div class="comments">
+  <%= render partial: "comments/form", object: @new_comment %>
+</div>
 
-<%= link_to "목록", topics_path %>
+<div class="actions">
+  <%= link_to "답글", new_topic_path(parent_id: @topic.id) %>
+  <%= link_to "목록", topics_path %>
+</div>
