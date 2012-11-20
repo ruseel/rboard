@@ -52,7 +52,7 @@ class TopicsControllerTest < ActionController::TestCase
   end
 
   test "should handle reply" do
-    post :create, topic: { subject: "1", body: "1" }
+    post :create, topic: { subject: @topic.subject, body: @topic.body }
     parent = assigns(:topic)
 
     post :create, topic: { subject: "reply-1", body: "reply-1" }, parent_id: parent.id
