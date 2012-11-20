@@ -1,5 +1,6 @@
 class Topic < ActiveRecord::Base
   belongs_to :admin
+  has_many :comments
 
   attr_accessible :body, :subject, :parent
   before_save :set_boardish

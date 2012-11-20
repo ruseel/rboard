@@ -8,6 +8,12 @@
 </div>
 
 <div class="comments">
+  <ul>
+    <% @comments.each do |c| %>
+      <li><%= c.body %></li>
+    <% end %>
+  </ul>
+
   <%= render partial: "comments/form", object: @new_comment %>
 </div>
 
