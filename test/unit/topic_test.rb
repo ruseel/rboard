@@ -6,6 +6,17 @@ class TopicTest < ActiveSupport::TestCase
      assert_not_nil t.boardish
   end
 
+  test "empty subject or empty body" do
+    t=Topic.create(subject: "", body: "abc")
+    assert_equal false, t.valid?
+    assert_equal 1, t.errors[:subject].size
+
+    t=Topic.create(subject: "s", body: "")
+    assert_equal false, t.valid?
+    assert_equal 0, t.errors[:subject].size
+    assert_equal 1, t.errors[:body].size
+  end
+
   test "create sub topic" do
     parent=Topic.create(subject: "parent", body: "parent")
     children=Topic.create(subject: "children", body: "children", parent: parent)

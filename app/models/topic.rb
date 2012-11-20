@@ -10,6 +10,8 @@ class Topic < ActiveRecord::Base
               allow_nil: true,
               converter: :to_i
 
+  validates :subject, :body, presence: true
+
   default_scope { order("boardish desc") }
 
   def parent=(p)
