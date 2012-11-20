@@ -7,4 +7,10 @@ class CommentTest < ActiveSupport::TestCase
     c.topic = t
     c.save
   end
+
+  test "body should be presence" do
+    c=Comment.create(body: "")
+    assert_equal false, c.valid?
+
+  end
 end
