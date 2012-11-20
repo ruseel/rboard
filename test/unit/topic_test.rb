@@ -1,20 +1,30 @@
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
+  setup do
+    @topic = topics(:one)
+  end
+
   test "create new topic without parent" do
      t=Topic.create(subject: "one", body: "one")
      assert_not_nil t.boardish
   end
 
   test "empty subject or empty body" do
-    t=Topic.create(subject: "", body: "abc")
+    t=Topic.create(subject: "", body: @topic.body)
     assert_equal false, t.valid?
-    assert_equal 1, t.errors[:subject].size
+    assert_equal 2, t.errors[:subject].size
 
-    t=Topic.create(subject: "s", body: "")
+    t=Topic.create(subject: @topic.subject, body: "")
     assert_equal false, t.valid?
     assert_equal 0, t.errors[:subject].size
     assert_equal 1, t.errors[:body].size
+  end
+
+  test "subject length is too short" do
+    t=Topic.create(subject: "a", body: @topic.body)
+    assert_equal false, t.valid?
+    assert t.errors[:subject].join(',').include?("is too short")
   end
 
   test "create sub topic" do
