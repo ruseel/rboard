@@ -10,7 +10,7 @@ class Topic < ActiveRecord::Base
               allow_nil: true,
               converter: :to_i
 
-  validates :subject, presence: true, length: { minimum: 3 }
+  validates :subject, presence: true, length: { minimum: 3, maximum: 50 }
   validates :body, presence: true
 
   default_scope { order("boardish desc") }

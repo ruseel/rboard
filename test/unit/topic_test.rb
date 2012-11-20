@@ -27,6 +27,12 @@ class TopicTest < ActiveSupport::TestCase
     assert t.errors[:subject].join(',').include?("is too short")
   end
 
+  test "subject length is too long" do
+    t=Topic.create(subject: "a"*51, body: @topic.body)
+    assert_equal false, t.valid?
+    assert t.errors[:subject].join(',').include?("is too long")
+  end
+
   test "create sub topic" do
     parent=Topic.create(subject: "parent", body: "parent")
     children=Topic.create(subject: "children", body: "children", parent: parent)
