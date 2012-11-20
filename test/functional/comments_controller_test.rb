@@ -33,6 +33,11 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to @topic
   end
 
+  test "error message for empty body" do
+    post :create, comment: {}, topic_id: @topic
+    assert_equal "empty body", flash[:notice]
+  end
+
   test "should get edit" do
     get :edit, id: @comment
     assert_response :success

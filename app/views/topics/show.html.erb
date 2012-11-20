@@ -8,6 +8,9 @@
 </div>
 
 <div class="comments">
+  <% flash.each do |k, v| %>
+    <div class="flash <%= k %>"><%= v %></div>
+  <% end %>
   <ul>
     <% @comments.each do |c| %>
       <li><%= c.body %></li>

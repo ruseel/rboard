@@ -12,13 +12,16 @@ class CommentsController < ApplicationController
   # end
 
   def create
-    @comment = Comment.new(params[:comment])
     @topic = Topic.find(params[:topic_id])
+
+    @comment = Comment.new(params[:comment])
     @comment.topic = @topic
     if @topic && @comment.save
       redirect_to @topic
     else
-      render :back, notice: "댓글 작성이 실패했습니다."
+      flash[:notice] = "empty body"
+      @comments = @topic.comments
+      render "topics/show"
     end
   end
 
