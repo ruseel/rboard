@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.topic = @topic
     if @topic && @comment.save
-      redirect_to @topic
+      redirect_to [@board, @topic]
     else
       flash[:notice] = "empty body"
       @comments = @topic.comments

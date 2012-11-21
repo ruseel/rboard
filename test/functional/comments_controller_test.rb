@@ -50,7 +50,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   test "should get destroy" do
     assert_difference('Comment.count', -1) do
-      delete :destroy, id: @comment.id
+      delete :destroy, id: @comment
     end
     assert_redirected_to @topic
   end
