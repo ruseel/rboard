@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  acronym: MyString
-  description: MyText
+  name: one
+  acronym: one
+  description: first board
 
 two:
-  name: MyString
-  acronym: MyString
-  description: MyText
+  name: two
+  acronym: two
+  description: first board
+

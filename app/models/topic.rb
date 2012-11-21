@@ -3,7 +3,7 @@ class Topic < ActiveRecord::Base
   belongs_to :admin
   has_many :comments
 
-  attr_accessible :body, :subject, :parent
+  attr_accessible :body, :subject, :parent, :board
   before_save :set_boardish
 
   composed_of :boardish,

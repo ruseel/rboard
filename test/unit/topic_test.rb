@@ -3,6 +3,13 @@ require 'test_helper'
 class TopicTest < ActiveSupport::TestCase
   setup do
     @topic = topics(:one)
+    @board = boards(:one)
+  end
+
+  test "topic belongs to board" do
+    Topic.create(subject: @topic.subject, body: @topic.body, board: @board)
+
+    assert_equal 1, boards(:two).topics.count
   end
 
   test "create new topic without parent" do
@@ -60,6 +67,6 @@ class TopicTest < ActiveSupport::TestCase
     one_two_one=Topic.create(subject: "one_two_one", body: "one_two_one", parent: one_two)
 
     subjects = Topic.all.map(&:subject)
-    assert_equal %w(two two_one one one_one one_one_one one_two one_two_one one_three fixture_one), subjects
+    assert_equal %w(two two_one one one_one one_one_one one_two one_two_one one_three topic_belongs_to_board_two fixture_one), subjects
   end
 end
