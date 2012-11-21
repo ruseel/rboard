@@ -1,5 +1,7 @@
 Rboard::Application.routes.draw do
-  resources :boards
+  resources :boards do
+    resources :topics
+  end
 
   resources :topics
   resources :comments
