@@ -4,6 +4,10 @@ class TopicsControllerTest < ActionController::TestCase
   setup do
     @topic = topics(:one)
     @board = boards(:one)
+
+    # boardish value is not setted for fixture, so do it.
+    @topic.boardish = Boardish.new
+    @topic.save
   end
 
   test "should get index" do
@@ -26,7 +30,7 @@ class TopicsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:topic)
   end
 
-  test "should get create" do
+  test "should create topic" do
     assert_difference('Topic.count', 1) do
       post :create, board_id: @board, topic: { subject: @topic.subject, body: @topic.body }, parent_id: ""
     end
@@ -44,7 +48,7 @@ class TopicsControllerTest < ActionController::TestCase
     assert_redirected_to board_topic_path(@board, assigns(:topic))
   end
 
-  test "should get destroy" do
+  test "should destroy topic" do
     assert_difference('Topic.count', -1) do
       delete :destroy, id: @topic, board_id: @board
     end
@@ -52,11 +56,9 @@ class TopicsControllerTest < ActionController::TestCase
     assert_redirected_to board_topics_path(@board)
   end
 
-  test "should handle reply" do
-    post :create, topic: { subject: @topic.subject, body: @topic.body }, board_id: @board
-    parent = assigns(:topic)
-
-    post :create, topic: { subject: "reply-1", body: "reply-1" }, parent_id: parent.id, board_id: @board
-    assert_equal parent.boardish.inc_at_depth(1), assigns(:topic).boardish
+  test "should create reply" do
+    reply = topics(:reply)
+    post :create, topic: { subject: reply.subject, body: reply.body }, parent_id: @topic, board_id: @board
+    assert_equal @topic.boardish.inc_at_depth(1), assigns(:topic).boardish
   end
 end

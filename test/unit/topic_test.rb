@@ -55,6 +55,8 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "ordered threads" do
+    orig_subjects = Topic.all.map(&:subject)
+
     one=Topic.create(subject: "one", body: "one")
     one_one=Topic.create(subject: "one_one", body: "one_one", parent: one)
     two=Topic.create(subject: "two", body: "two")
@@ -67,6 +69,6 @@ class TopicTest < ActiveSupport::TestCase
     one_two_one=Topic.create(subject: "one_two_one", body: "one_two_one", parent: one_two)
 
     subjects = Topic.all.map(&:subject)
-    assert_equal %w(two two_one one one_one one_one_one one_two one_two_one one_three topic_belongs_to_board_two fixture_one), subjects
+    assert_equal %w(two two_one one one_one one_one_one one_two one_two_one one_three) + orig_subjects, subjects
   end
 end

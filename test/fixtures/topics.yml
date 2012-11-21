@@ -8,3 +8,7 @@ topic_belongs_to_board_two:
   subject: topic_belongs_to_board_two
   body: some body
   board: two
+
+reply:
+  subject: reply
+  body: reply
