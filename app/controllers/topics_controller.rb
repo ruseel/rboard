@@ -1,8 +1,13 @@
 class TopicsController < ApplicationController
   helper_method :depth_mark
 
+  before_filter :set_board
+
+  def set_board
+    @board = Board.where(id: params[:board_id]).first
+  end
+
   def index
-    @board = Board.find(params[:board_id])
     @topics = @board.topics
   end
 
@@ -23,7 +28,7 @@ class TopicsController < ApplicationController
     end
 
     if @topic.save
-      redirect_to @topic, notice: 'Topic was created'
+      redirect_to [@board, @topic], notice: 'Topic was created'
     end
   end
 

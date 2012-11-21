@@ -27,11 +27,11 @@ class TopicsControllerTest < ActionController::TestCase
   end
 
   test "should get create" do
-    assert_difference('Topic.count') do
-      post :create, topic: { subject: @topic.subject, body: @topic.body }, parent_id: ""
+    assert_difference('Topic.count', 1) do
+      post :create, board_id: @board, topic: { subject: @topic.subject, body: @topic.body }, parent_id: ""
     end
 
-    assert_redirected_to topic_path(assigns(:topic))
+    assert_redirected_to board_topic_path(@board, assigns(:topic))
   end
 
   test "should get edit" do
