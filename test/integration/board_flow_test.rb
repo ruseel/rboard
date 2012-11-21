@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class BoardFlowTest < ActionDispatch::IntegrationTest
-  test "boards/1/topics url" do
-    get "/boards/1/topics"
+  test "get url topics of boards(:one) " do
+    get board_topics_path(boards(:one))
+    assert_equal 0, assigns(:topics).size
   end
 end

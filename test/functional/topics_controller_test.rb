@@ -3,10 +3,11 @@ require 'test_helper'
 class TopicsControllerTest < ActionController::TestCase
   setup do
     @topic = topics(:one)
+    @board = boards(:one)
   end
 
   test "should get index" do
-    get :index
+    get :index, board_id: @board
     assert_response :success
     assert_not_nil assigns(:topics)
   end

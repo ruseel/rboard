@@ -2,7 +2,8 @@ class TopicsController < ApplicationController
   helper_method :depth_mark
 
   def index
-    @topics = Topic.all
+    @board = Board.find(params[:board_id])
+    @topics = @board.topics
   end
 
   def show
