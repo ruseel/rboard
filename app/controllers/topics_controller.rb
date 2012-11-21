@@ -39,7 +39,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find(params[:id])
     if @topic.update_attributes(params[:topic])
-      redirect_to @topic, notice: 'Topic was successfuly updated.'
+      redirect_to [@board, @topic], notice: 'Topic was successfuly updated.'
     else
       render action: 'edit'
     end
@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.destroy
 
-    redirect_to topics_url
+    redirect_to board_topics_url(@board)
   end
 
 private
