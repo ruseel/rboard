@@ -1,26 +1,28 @@
-<div class="article">
-  <div class="subject">
-    제목: <%= @topic.subject %>
+<div class="rboard">
+  <div class="article">
+    <h1><%= @topic.subject %></h1>
+    <hr>
+    <div class="body">
+      <%= @topic.body %>
+    </div>
   </div>
-  <div class="body">
-    <%= @topic.body %>
-  </div>
-</div>
 
-<div class="comments">
-  <% flash.each do |k, v| %>
-    <div class="flash <%= k %>"><%= v %></div>
-  <% end %>
-  <ul>
-    <% @comments.each do |c| %>
-      <li><%= c.body %></li>
+  <div class="actions">
+    <%= link_to "답글", new_topic_path(parent_id: @topic.id) %>
+    <%= link_to "목록", topics_path %>
+  </div>
+
+
+  <div class="comments">
+    <%= render partial: "comments/form", object: @new_comment %>
+
+    <% flash.each do |k, v| %>
+      <div class="flash <%= k %>"><%= v %></div>
     <% end %>
-  </ul>
-
-  <%= render partial: "comments/form", object: @new_comment %>
-</div>
-
-<div class="actions">
-  <%= link_to "답글", new_topic_path(parent_id: @topic.id) %>
-  <%= link_to "목록", topics_path %>
+    <ul>
+      <% @comments.each do |c| %>
+        <li><%= c.body %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

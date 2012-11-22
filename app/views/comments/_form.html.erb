@@ -1,5 +1,5 @@
 <%= form_for @comment do |f| %>
   <%= hidden_field_tag :topic_id, @comment.topic.id %>
-  <%= f.text_area :body %>
-  <%= f.submit "댓글 적기" %>
+  <%= f.text_area :body, class: "span9" %>
+  <%= f.submit "댓글 적기", class: "btn " %>
 <% end %>

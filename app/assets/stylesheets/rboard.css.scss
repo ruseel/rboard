@@ -2,10 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.rboard th.subject {
-  width: 80%;
+.rboard {
+  th.subject {
+    width: 80%;
+  }
+
+  .table td {
+    white-space: nowrap;
+  }
+
+  .article {
+    margin: 20px 0;
+  }
+
+  .actions {
+    margin: 20px 0 40px;
+  }
+
+  .comments {
+    form {
+      textarea#comment_body {
+        height: 5em;
+      }
+      .btn {
+        vertical-align: top;
+      }
+    }
+  }
 }
 
-.rboard .table td {
-  white-space: nowrap;
-}
