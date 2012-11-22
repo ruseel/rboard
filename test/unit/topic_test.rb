@@ -13,8 +13,8 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "create new topic without parent" do
-     t=Topic.create(subject: "one", body: "one")
-     assert_not_nil t.boardish
+    t=Topic.create(subject: "one", body: "one")
+    assert_not_nil t.boardish
   end
 
   test "empty subject or empty body" do

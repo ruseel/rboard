@@ -43,7 +43,7 @@ v create
 v reply
 v edit
 v update
-- delete
+v delete
 
 - pagination gem 적용 
 
