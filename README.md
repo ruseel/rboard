@@ -45,14 +45,11 @@ v edit
 v update
 v delete
 
-- pagination gem 적용 
-
+v pagination gem 적용 
 
 model test
 v 댓글 쓰기 
 v 댓글 쓰기 (댓글에는 depth가 없도록 한다)
-
-
 
 board 관리 페이지 
 board 삭제하기 
@@ -60,7 +57,11 @@ board 삭제하기
 authentication
 authorization
 
+한글 리소스 추가
+
 Engine형태로 변경하기 
+
+
 
 app에서 template을 override할 수 있게 시험 
 
