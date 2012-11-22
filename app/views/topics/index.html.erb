@@ -10,12 +10,12 @@
     <% @topics.each do |topic| %>
       <tr>
         <td>
-          <%= link_to (depth_mark(topic.depth) + topic.subject), [topic.board,topic] %>
+          <%= link_to (depth_mark(topic.depth) + topic.subject), [topic.board, topic] %>
         </td>
         <td><%= topic.created_at %></td>
         <td>
-          <%= link_to "보기", topic %>
-          <%= link_to "수정", edit_topic_path(topic) %>
+          <%= link_to "보기", [topic.board,topic] %>
+          <%= link_to "수정", edit_board_topic_path(topic.board, topic) %>
         </td>
       </tr>
     <% end %>
@@ -24,6 +24,6 @@
   <%= paginate @topics %>
 
   <div class="footer">
-    <%= link_to "새글 작성", new_topic_path %>
+    <%= link_to "새글 작성", new_board_topic_path(@board) %>
   </div>
 </div>
