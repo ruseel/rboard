@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CommentsControllerTest < ActionController::TestCase
   setup do
+    @board = boards(:one)
     @comment = comments(:one)
     @topic = topics(:one)
   end
@@ -17,7 +18,7 @@ class CommentsControllerTest < ActionController::TestCase
       post :create, comment: { body: "comment" }, topic_id: @topic
     end
 
-    assert_redirected_to @topic
+    assert_redirected_to [@topic.board, @topic]
   end
 
   test "should show flash for empty body" do

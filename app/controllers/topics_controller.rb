@@ -7,6 +7,7 @@ class TopicsController < ApplicationController
     @board = Board.where(id: params[:board_id]).first
   end
 
+
   def index
     @topics = @board.topics.page(params[:page])
   end
@@ -23,6 +24,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(params[:topic])
+    @topic.board = @board
     if params[:parent_id].present?
       @topic.parent = Topic.find(params[:parent_id])
     end

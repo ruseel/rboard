@@ -10,7 +10,7 @@
     <% @topics.each do |topic| %>
       <tr>
         <td>
-          <%= link_to (depth_mark(topic.depth) + topic.subject), topic %>
+          <%= link_to (depth_mark(topic.depth) + topic.subject), [topic.board,topic] %>
         </td>
         <td><%= topic.created_at %></td>
         <td>

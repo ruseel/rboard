@@ -1,23 +1,25 @@
 # vim: set fileencoding=utf-8 :
 class CommentsController < ApplicationController
-  # def index
-  #   @comments = Comment.all
-  # end
+
+  before_filter :set_board
+
+  def set_board
+    @board = Board.where(id: params[:board_id]).first
+  end
+
 
   def show
     @comment = Comment.find(params[:id])
   end
 
-  # def new
-  # end
-
   def create
     @topic = Topic.find(params[:topic_id])
+    @board = @topic.board
 
     @comment = Comment.new(params[:comment])
     @comment.topic = @topic
     if @topic && @comment.save
-      redirect_to [@board, @topic]
+      redirect_to [@topic.board, @topic]
     else
       flash[:notice] = "empty body"
       @comments = @topic.comments

@@ -8,8 +8,8 @@
   </div>
 
   <div class="actions">
-    <%= link_to "답글", new_topic_path(parent_id: @topic.id) %>
-    <%= link_to "목록", topics_path %>
+    <%= link_to "답글", new_board_topic_path(@board, parent_id: @topic.id) %>
+    <%= link_to "목록", board_topics_path(@board) %>
   </div>
 
 

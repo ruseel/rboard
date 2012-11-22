@@ -59,6 +59,7 @@ class TopicsControllerTest < ActionController::TestCase
   test "should create reply" do
     reply = topics(:reply)
     post :create, topic: { subject: reply.subject, body: reply.body }, parent_id: @topic, board_id: @board
+    assert_equal @board, assigns(:topic).board
     assert_equal @topic.boardish.inc_at_depth(1), assigns(:topic).boardish
   end
 end
