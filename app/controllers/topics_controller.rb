@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def index
-    @topics = @board.topics
+    @topics = @board.topics.page(params[:page])
   end
 
   def show
