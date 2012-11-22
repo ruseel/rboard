@@ -1,24 +1,28 @@
-<h1>Topics#index</h1>
-<table class="table table-bordered">
-    <tr>
-      <th>제목</th>
-      <th>작성일</th>
-      <th></th>
-    </tr>
-  <% @topics.each do |topic| %>
-    <tr>
-      <td><%= depth_mark(topic.depth) %> <%= topic.subject %></td>
-      <td><%= topic.created_at %></td>
-      <td>
-        <%= link_to "보기", topic %>
-        <%= link_to "수정", edit_topic_path(topic) %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<h1>index</h1>
+<div class="rboard">
+  <table class="table table-bordered">
+      <tr>
+        <th class="subject">제목</th>
+        <th>작성일</th>
+        <th></th>
+      </tr>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td>
+          <%= link_to (depth_mark(topic.depth) + topic.subject), topic %>
+        </td>
+        <td><%= topic.created_at %></td>
+        <td>
+          <%= link_to "보기", topic %>
+          <%= link_to "수정", edit_topic_path(topic) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 
-<%= paginate @topics %>
+  <%= paginate @topics %>
 
-<div class="footer">
-  <%= link_to "새글 작성", new_topic_path %>
+  <div class="footer">
+    <%= link_to "새글 작성", new_topic_path %>
+  </div>
 </div>
