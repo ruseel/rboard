@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount Xyz::Engine => "/xyz"
+  mount Rboard::Engine => "/rboard"
 end
