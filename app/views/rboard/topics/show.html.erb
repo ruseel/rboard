@@ -1,0 +1,28 @@
+<div class="rboard">
+  <div class="article">
+    <h1><%= @topic.subject %></h1>
+    <hr>
+    <div class="body">
+      <%= @topic.body %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= link_to "답글", new_board_topic_path(@board, parent_id: @topic.id) %>
+    <%= link_to "목록", board_topics_path(@board) %>
+  </div>
+
+
+  <div class="comments">
+    <%= render partial: "rboard/comments/form", object: @new_comment %>
+
+    <% flash.each do |k, v| %>
+      <div class="flash <%= k %>"><%= v %></div>
+    <% end %>
+    <ul>
+      <% @comments.each do |c| %>
+        <li><%= c.body %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
