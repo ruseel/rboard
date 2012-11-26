@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gemspec
+
 gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
@@ -15,13 +17,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
-  gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-  gem "twitter-bootstrap-rails"
-
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails'
-  gem 'kaminari-bootstrap'
 end
 
 gem 'jquery-rails'
@@ -41,5 +37,11 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # To use debugger
 # gem 'debugger'
 
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
 gem 'kaminari'
+gem 'kaminari-bootstrap'
+
 gem 'simple_form'

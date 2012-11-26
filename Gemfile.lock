@@ -1,3 +1,10 @@
+PATH
+  remote: .
+  specs:
+    rboard (0.0.1)
+      kaminari
+      rails (~> 3.2.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,6 +140,7 @@ DEPENDENCIES
   kaminari-bootstrap
   less-rails
   rails (= 3.2.8)
+  rboard!
   sass-rails (~> 3.2.3)
   simple_form
   sqlite3
