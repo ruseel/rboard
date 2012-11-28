@@ -7,7 +7,7 @@ module Rboard
     end
 
     test "get url topics of boards(:one) " do
-      get board_topics_path(rboard_boards(:one))
+      get rboard.board_topics_path(rboard_boards(:one))
       assert_equal 1, assigns(:topics).size
     end
   end

@@ -7,19 +7,19 @@ module Rboard
     end
 
     test "topic create, show, edit, update" do
-      get new_board_topic_path(@board)
+      get rboard.new_board_topic_path(@board)
 
-      post_via_redirect board_topics_path(@board), :topic => { subject: "one", body: "one_body" }
+      post_via_redirect rboard.board_topics_path(@board), :topic => { subject: "one", body: "one_body" }
       path =~ /\/topics\/([\d]+)/
       id = $1
 
       get edit_topic_path(id)
 
-      put_via_redirect board_topic_path(@board, id), :topic => { subject: "modified", body: "modified body" }
+      put_via_redirect rboard.board_topic_path(@board, id), :topic => { subject: "modified", body: "modified body" }
     end
 
     test "topic create and add one comment" do
-      post_via_redirect board_topics_path(@board), :topic => { subject: "one", body: "one_body" }
+      post_via_redirect rboard.board_topics_path(@board), :topic => { subject: "one", body: "one_body" }
       _path = path
       path =~ /\/topics\/([\d]+)/
       id = $1
