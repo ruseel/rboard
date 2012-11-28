@@ -3,7 +3,7 @@ require 'test_helper'
 module Rboard
   class CommentTest < ActiveSupport::TestCase
     setup do
-      @topic = topics(:one)
+      @topic = rboard_topics(:one)
     end
 
     test "belongs_to topic" do

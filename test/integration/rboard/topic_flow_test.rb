@@ -3,7 +3,7 @@ require 'test_helper'
 module Rboard
   class TopicFlowTest < ActionDispatch::IntegrationTest
     setup do
-      @board = boards(:one)
+      @board = rboard_boards(:one)
     end
 
     test "topic create, show, edit, update" do

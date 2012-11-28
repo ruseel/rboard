@@ -3,7 +3,7 @@ require 'test_helper'
 module Rboard
   class BoardsControllerTest < ActionController::TestCase
     setup do
-      @board = boards(:one)
+      @board = rboard_boards(:one)
     end
 
     test "should get index" do

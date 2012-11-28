@@ -3,9 +3,9 @@ require 'test_helper'
 module Rboard
   class CommentsControllerTest < ActionController::TestCase
     setup do
-      @board = boards(:one)
-      @comment = comments(:one)
-      @topic = topics(:one)
+      @board = rboard_boards(:one)
+      @comment = rboard_comments(:one)
+      @topic = rboard_topics(:one)
     end
 
     test "should show" do

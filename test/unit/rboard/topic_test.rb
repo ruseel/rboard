@@ -6,13 +6,13 @@ module Rboard
 
     setup do
       @topic = rboard_topics(:one)
-      @board = boards(:one)
+      @board = rboard_boards(:one)
     end
 
     test "topic belongs to board" do
       Topic.create(subject: @topic.subject, body: @topic.body, board: @board)
 
-      assert_equal 1, boards(:two).topics.count
+      assert_equal 1, rboard_boards(:two).topics.count
     end
 
     test "create new topic without parent" do

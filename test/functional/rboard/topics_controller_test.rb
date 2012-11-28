@@ -3,8 +3,8 @@ require 'test_helper'
 module Rboard
   class TopicsControllerTest < ActionController::TestCase
     setup do
-      @topic = topics(:one)
-      @board = boards(:one)
+      @topic = rboard_topics(:one)
+      @board = rboard_boards(:one)
 
       # boardish value is not setted for fixture, so do it.
       @topic.boardish = Boardish.new
@@ -58,7 +58,7 @@ module Rboard
     end
 
     test "should create reply" do
-      reply = topics(:reply)
+      reply = rboard_topics(:reply)
       post :create, topic: { subject: reply.subject, body: reply.body }, parent_id: @topic, board_id: @board
       assert_equal @board, assigns(:topic).board
       assert_equal @topic.boardish.inc_at_depth(1), assigns(:topic).boardish
