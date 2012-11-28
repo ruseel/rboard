@@ -24,7 +24,7 @@ module Rboard
       else
         flash[:notice] = "empty body"
         @comments = @topic.comments
-        render "topics/show"
+        render "rboard/topics/show"
       end
     end
 

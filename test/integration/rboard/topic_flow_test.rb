@@ -13,7 +13,7 @@ module Rboard
       path =~ /\/topics\/([\d]+)/
       id = $1
 
-      get edit_topic_path(id)
+      get rboard.edit_topic_path(id)
 
       put_via_redirect rboard.board_topic_path(@board, id), :topic => { subject: "modified", body: "modified body" }
     end
